@@ -1,17 +1,21 @@
 {
   "name": "create-expo-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.ts",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "dev": "APP_VARIANT=development npx expo start",
+    "android": "expo run:android",
+    "android:dev": "APP_VARIANT=development expo run:android -d",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint ."
   },
   "dependencies": {
     "expo": "~53.0.10",
+    "expo-dev-client": "~5.2.0",
     "expo-status-bar": "~2.2.3",
+    "expo-updates": "~0.28.14",
     "react": "19.0.0",
     "react-native": "0.79.3"
   },
