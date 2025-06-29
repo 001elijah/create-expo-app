@@ -14,6 +14,14 @@ export default function AuthScreen() {
     router.push({ params: { url: 'https://example.com/privacy' }, pathname: '/webview' })
   }
 
+  const handleSignUpPress = () => {
+    router.push('/signup')
+  }
+
+  const handleLoginPress = () => {
+    router.push('/login')
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.header}>
@@ -24,10 +32,10 @@ export default function AuthScreen() {
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.logo}>[Company Logo]</Text>
         <Text style={styles.title}>Shop and sell on the world&#39;s largest fashion and streetwear community.</Text>
-        <TouchableOpacity style={[styles.button, styles.signUpButton]}>
+        <TouchableOpacity onPress={handleSignUpPress} style={[styles.button, styles.signUpButton]}>
           <Text style={styles.signUpButtonText}>SIGN UP WITH EMAIL</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.loginButton]}>
+        <TouchableOpacity onPress={handleLoginPress} style={[styles.button, styles.loginButton]}>
           <Text style={styles.loginButtonText}>LOGIN WITH EMAIL</Text>
         </TouchableOpacity>
         <View style={styles.dividerContainer}>

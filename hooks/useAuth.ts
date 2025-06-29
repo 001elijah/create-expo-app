@@ -9,7 +9,7 @@ export const useAuth = () => {
     if (isAuthenticated) {
       callback()
     } else {
-      router.push('/auth')
+      router.push('/(auth)')
     }
   }
 
