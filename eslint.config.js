@@ -50,6 +50,12 @@ module.exports = [
     }
   },
   {
+    files: ['babel.config.js'],
+    rules: {
+      'perfectionist/sort-objects': 'off'
+    }
+  },
+  {
     ignores: ['node_modules', 'dist/*']
   }
 ]

@@ -2,29 +2,16 @@ import AntDesign from '@expo/vector-icons/AntDesign'
 import { useRouter } from 'expo-router'
 import { Formik } from 'formik'
 import { useState } from 'react'
-import {
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Switch,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
-} from 'react-native'
+import { Platform, Pressable, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as Yup from 'yup'
+import { FormField } from '@/components'
+import { SignUpFormValues } from '@/types'
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address').required('Email is required'),
   password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required')
 })
-
-interface SignUpFormValues {
-  email: string
-  password: string
-}
 
 export default function SignUpScreen() {
   const router = useRouter()
@@ -47,47 +34,23 @@ export default function SignUpScreen() {
         <Text style={styles.title}>Sign up</Text>
 
         <Formik initialValues={{ email: '', password: '' }} onSubmit={handleSignUp} validationSchema={SignUpSchema}>
-          {({ errors, handleBlur, handleChange, handleSubmit, touched, values }) => (
+          {formikProps => (
             <View style={styles.form}>
-              <View style={styles.inputContainer}>
-                <Text style={styles.label}>Email</Text>
-                <TextInput
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  keyboardType="email-address"
-                  onBlur={handleBlur('email')}
-                  onChangeText={handleChange('email')}
-                  placeholder="Enter your email"
-                  style={[
-                    styles.input,
-                    touched.email && errors.email && values.email !== '' ? styles.inputError : null
-                  ]}
-                  value={values.email}
-                />
-                {touched.email && errors.email && values.email !== '' && (
-                  <Text style={styles.errorText}>{errors.email}</Text>
-                )}
-              </View>
+              <FormField
+                formik={formikProps}
+                keyboardType="email-address"
+                label="Email"
+                name="email"
+                placeholder="Enter your email"
+              />
 
-              <View style={styles.inputContainer}>
-                <Text style={styles.label}>Password</Text>
-                <TextInput
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  onBlur={handleBlur('password')}
-                  onChangeText={handleChange('password')}
-                  placeholder="Enter your password"
-                  secureTextEntry
-                  style={[
-                    styles.input,
-                    touched.password && errors.password && values.password !== '' ? styles.inputError : null
-                  ]}
-                  value={values.password}
-                />
-                {touched.password && errors.password && values.password !== '' && (
-                  <Text style={styles.errorText}>{errors.password}</Text>
-                )}
-              </View>
+              <FormField
+                formik={formikProps}
+                label="Password"
+                name="password"
+                placeholder="Enter your password"
+                secureTextEntry
+              />
 
               <View style={styles.toggleContainer}>
                 <Switch
@@ -104,7 +67,7 @@ export default function SignUpScreen() {
 
               <View style={styles.bottomContainer}>
                 <View style={styles.dividerWithShadow} />
-                <TouchableOpacity onPress={() => handleSubmit()} style={styles.nextButton}>
+                <TouchableOpacity onPress={() => formikProps.handleSubmit()} style={styles.nextButton}>
                   <Text style={styles.nextButtonText}>NEXT</Text>
                 </TouchableOpacity>
               </View>

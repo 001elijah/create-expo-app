@@ -1,19 +1,16 @@
 import AntDesign from '@expo/vector-icons/AntDesign'
 import { useRouter } from 'expo-router'
 import { Formik } from 'formik'
-import { Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Platform, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as Yup from 'yup'
+import { FormField } from '@/components'
+import { LoginFormValues } from '@/types'
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address').required('Email is required'),
   password: Yup.string().required('Password is required')
 })
-
-interface LoginFormValues {
-  email: string
-  password: string
-}
 
 export default function LoginScreen() {
   const router = useRouter()
@@ -39,47 +36,23 @@ export default function LoginScreen() {
         <Text style={styles.title}>Log in</Text>
 
         <Formik initialValues={{ email: '', password: '' }} onSubmit={handleLogin} validationSchema={LoginSchema}>
-          {({ errors, handleBlur, handleChange, handleSubmit, touched, values }) => (
+          {formikProps => (
             <View style={styles.form}>
-              <View style={styles.inputContainer}>
-                <Text style={styles.label}>Email</Text>
-                <TextInput
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  keyboardType="email-address"
-                  onBlur={handleBlur('email')}
-                  onChangeText={handleChange('email')}
-                  placeholder="Enter your email"
-                  style={[
-                    styles.input,
-                    touched.email && errors.email && values.email !== '' ? styles.inputError : null
-                  ]}
-                  value={values.email}
-                />
-                {touched.email && errors.email && values.email !== '' && (
-                  <Text style={styles.errorText}>{errors.email}</Text>
-                )}
-              </View>
+              <FormField
+                formik={formikProps}
+                keyboardType="email-address"
+                label="Email"
+                name="email"
+                placeholder="Enter your email"
+              />
 
-              <View style={styles.inputContainer}>
-                <Text style={styles.label}>Password</Text>
-                <TextInput
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  onBlur={handleBlur('password')}
-                  onChangeText={handleChange('password')}
-                  placeholder="Enter your password"
-                  secureTextEntry
-                  style={[
-                    styles.input,
-                    touched.password && errors.password && values.password !== '' ? styles.inputError : null
-                  ]}
-                  value={values.password}
-                />
-                {touched.password && errors.password && values.password !== '' && (
-                  <Text style={styles.errorText}>{errors.password}</Text>
-                )}
-              </View>
+              <FormField
+                formik={formikProps}
+                label="Password"
+                name="password"
+                placeholder="Enter your password"
+                secureTextEntry
+              />
 
               <TouchableOpacity onPress={handleForgotPassword} style={styles.forgotPasswordContainer}>
                 <Text style={styles.forgotPasswordText}>Forgot password?</Text>
@@ -87,7 +60,7 @@ export default function LoginScreen() {
 
               <View style={styles.bottomContainer}>
                 <View style={styles.dividerWithShadow} />
-                <TouchableOpacity onPress={() => handleSubmit()} style={styles.nextButton}>
+                <TouchableOpacity onPress={() => formikProps.handleSubmit()} style={styles.nextButton}>
                   <Text style={styles.nextButtonText}>NEXT</Text>
                 </TouchableOpacity>
               </View>
@@ -138,11 +111,6 @@ const styles = StyleSheet.create({
     }),
     width: 'auto'
   },
-  errorText: {
-    color: '#ff0000',
-    fontSize: 12,
-    marginTop: 5
-  },
   forgotPasswordContainer: {
     alignSelf: 'flex-start',
     marginBottom: 20
@@ -160,25 +128,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 10,
     paddingTop: Platform.OS === 'android' ? 15 : 10
-  },
-  input: {
-    borderColor: 'black',
-    borderRadius: 0,
-    borderWidth: 1,
-    fontSize: 16,
-    marginTop: 8,
-    padding: 15
-  },
-  inputContainer: {
-    marginBottom: 20
-  },
-  inputError: {
-    borderColor: '#ff0000'
-  },
-  label: {
-    color: 'black',
-    fontSize: 16,
-    fontWeight: '500'
   },
   nextButton: {
     alignItems: 'center',
