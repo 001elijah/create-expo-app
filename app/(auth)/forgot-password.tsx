@@ -1,17 +1,15 @@
 import AntDesign from '@expo/vector-icons/AntDesign'
 import { useRouter } from 'expo-router'
 import { Formik } from 'formik'
-import { Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Platform, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as Yup from 'yup'
+import { FormField } from '@/components'
+import { ForgotPasswordFormValues } from '@/types'
 
 const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address').required('Email is required')
 })
-
-interface ForgotPasswordFormValues {
-  email: string
-}
 
 export default function ForgotPasswordScreen() {
   const router = useRouter()
@@ -36,31 +34,19 @@ export default function ForgotPasswordScreen() {
         <Text style={styles.description}>We&#39;ll email you with instructions on resetting your password.</Text>
 
         <Formik initialValues={{ email: '' }} onSubmit={handleSend} validationSchema={ForgotPasswordSchema}>
-          {({ errors, handleBlur, handleChange, handleSubmit, touched, values }) => (
+          {formikProps => (
             <View style={styles.form}>
-              <View style={styles.inputContainer}>
-                <Text style={styles.label}>Email</Text>
-                <TextInput
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  keyboardType="email-address"
-                  onBlur={handleBlur('email')}
-                  onChangeText={handleChange('email')}
-                  placeholder="Enter your email"
-                  style={[
-                    styles.input,
-                    touched.email && errors.email && values.email !== '' ? styles.inputError : null
-                  ]}
-                  value={values.email}
-                />
-                {touched.email && errors.email && values.email !== '' && (
-                  <Text style={styles.errorText}>{errors.email}</Text>
-                )}
-              </View>
+              <FormField
+                formik={formikProps}
+                keyboardType="email-address"
+                label="Email"
+                name="email"
+                placeholder="Enter your email"
+              />
 
               <View style={styles.bottomContainer}>
                 <View style={styles.dividerWithShadow} />
-                <TouchableOpacity onPress={() => handleSubmit()} style={styles.sendButton}>
+                <TouchableOpacity onPress={() => formikProps.handleSubmit()} style={styles.sendButton}>
                   <Text style={styles.sendButtonText}>SEND</Text>
                 </TouchableOpacity>
               </View>

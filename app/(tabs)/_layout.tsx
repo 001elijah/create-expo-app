@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons'
 import { Tabs, useRouter } from 'expo-router'
 import { Pressable, View } from 'react-native'
-import { useAuth } from '../../hooks/useAuth'
+import { useAuth } from '@/hooks/useAuth'
 
 export default function TabLayout() {
   const { checkAuthAndRun } = useAuth()
