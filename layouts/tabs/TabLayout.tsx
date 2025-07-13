@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router'
-import { useTabNavigation } from '@/hooks'
+import { useTabNavigation } from '@/hooks/useTabNavigation'
 import { tabs } from '@/layouts/tabs'
 
 export default function TabLayout() {

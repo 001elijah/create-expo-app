@@ -1,5 +1,6 @@
 export * from './auth/forgotPassword'
 export * from './auth/login'
 export * from './auth/signup'
+export * from './components/carousel'
 export * from './components/formField'
 export * from './tabs/navigation'
