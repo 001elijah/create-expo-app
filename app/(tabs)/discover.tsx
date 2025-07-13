@@ -1,17 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { DiscoverView } from '@/layouts/tabs/views'
 
 export default function DiscoverScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Discover</Text>
-    </View>
-  )
+  return <DiscoverView />
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center'
-  }
-})

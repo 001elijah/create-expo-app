@@ -1,8 +1,8 @@
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
-import { useAuth } from '@/hooks/useAuth'
 import { HeaderLeft, HeaderRight } from '@/layouts/tabs'
-import { TabDefinition } from '@/types'
+import { TabDefinition } from '@/types/tabs/navigation'
+import { useAuth } from './useAuth'
 
 /**
  * Hook for tab navigation utilities
