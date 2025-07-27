@@ -2,10 +2,10 @@ import AntDesign from '@expo/vector-icons/AntDesign'
 import { useRouter } from 'expo-router'
 import { Formik } from 'formik'
 import { useState } from 'react'
-import { Platform, Pressable, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native'
+import { Platform, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as Yup from 'yup'
-import { FormField } from '@/components'
+import { FormField, PrimaryButton } from '@/components'
 import { SignUpFormValues } from '@/types'
 
 const SignUpSchema = Yup.object().shape({
@@ -67,9 +67,7 @@ export default function SignUpScreen() {
 
               <View style={styles.bottomContainer}>
                 <View style={styles.dividerWithShadow} />
-                <TouchableOpacity onPress={() => formikProps.handleSubmit()} style={styles.nextButton}>
-                  <Text style={styles.nextButtonText}>NEXT</Text>
-                </TouchableOpacity>
+                <PrimaryButton onPress={() => formikProps.handleSubmit()} title="NEXT" variant="primary" />
               </View>
             </View>
           )}
