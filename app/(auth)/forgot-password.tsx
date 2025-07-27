@@ -1,10 +1,10 @@
 import AntDesign from '@expo/vector-icons/AntDesign'
 import { useRouter } from 'expo-router'
 import { Formik } from 'formik'
-import { Platform, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as Yup from 'yup'
-import { FormField } from '@/components'
+import { FormField, PrimaryButton } from '@/components'
 import { ForgotPasswordFormValues } from '@/types'
 
 const ForgotPasswordSchema = Yup.object().shape({
@@ -46,9 +46,7 @@ export default function ForgotPasswordScreen() {
 
               <View style={styles.bottomContainer}>
                 <View style={styles.dividerWithShadow} />
-                <TouchableOpacity onPress={() => formikProps.handleSubmit()} style={styles.sendButton}>
-                  <Text style={styles.sendButtonText}>SEND</Text>
-                </TouchableOpacity>
+                <PrimaryButton onPress={() => formikProps.handleSubmit()} title="SEND" variant="primary" />
               </View>
             </View>
           )}

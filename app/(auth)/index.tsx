@@ -1,7 +1,11 @@
 import AntDesign from '@expo/vector-icons/AntDesign'
+import { Image } from 'expo-image'
 import { useRouter } from 'expo-router'
-import { Platform, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { PrimaryButton } from '@/components'
+import { images } from '@/constants/images'
+import { scaleHeight, scaleImage, scaleVertical, scaleWidth } from '@/helpers/scale'
 
 export default function AuthScreen() {
   const router = useRouter()
@@ -30,28 +34,22 @@ export default function AuthScreen() {
         </Pressable>
       </View>
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.logo}>[Company Logo]</Text>
+        <Image
+          source={images.light.full_logo_hor}
+          style={[scaleImage(310, 30, scaleVertical(30)), { marginBottom: scaleHeight(30) }]}
+        />
         <Text style={styles.title}>Shop and sell on the world&#39;s largest fashion and streetwear community.</Text>
-        <TouchableOpacity onPress={handleSignUpPress} style={[styles.button, styles.signUpButton]}>
-          <Text style={styles.signUpButtonText}>SIGN UP WITH EMAIL</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleLoginPress} style={[styles.button, styles.loginButton]}>
-          <Text style={styles.loginButtonText}>LOGIN WITH EMAIL</Text>
-        </TouchableOpacity>
+        <PrimaryButton onPress={handleSignUpPress} title="SIGN UP WITH EMAIL" variant="primary" />
+
+        <PrimaryButton onPress={handleLoginPress} title="LOGIN WITH EMAIL" variant="outline" />
         <View style={styles.dividerContainer}>
           <View style={styles.divider} />
           <Text style={styles.dividerText}>or</Text>
           <View style={styles.divider} />
         </View>
-        <TouchableOpacity style={[styles.button, styles.facebookButton]}>
-          <Text style={styles.socialButtonText}>Continue with Facebook</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.googleButton]}>
-          <Text style={styles.loginButtonText}>Continue with Google</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.appleButton]}>
-          <Text style={styles.socialButtonText}>Continue with Apple</Text>
-        </TouchableOpacity>
+        <PrimaryButton onPress={() => {}} title="Continue with Facebook" variant="facebook" />
+        <PrimaryButton onPress={() => {}} title="Continue with Google" variant="google" />
+        <PrimaryButton onPress={() => {}} title="Continue with Apple" variant="apple" />
         <View style={styles.footer}>
           <Text style={styles.footerText}>
             By creating an account, I accept [Company name]&#39;s{' '}
@@ -74,16 +72,6 @@ export default function AuthScreen() {
 }
 
 const styles = StyleSheet.create({
-  appleButton: {
-    backgroundColor: 'black',
-    borderRadius: 5
-  },
-  button: {
-    alignItems: 'center',
-    marginBottom: 10,
-    padding: 15,
-    width: '100%'
-  },
   closeButton: {
     alignItems: 'center',
     backgroundColor: '#e0e0e0',
@@ -114,9 +102,6 @@ const styles = StyleSheet.create({
     color: '#888',
     marginHorizontal: 10
   },
-  facebookButton: {
-    backgroundColor: '#3b5998'
-  },
   footer: {
     paddingBottom: 20
   },
@@ -125,11 +110,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 10,
     textAlign: 'center'
-  },
-  googleButton: {
-    backgroundColor: 'white',
-    borderColor: '#ccc',
-    borderWidth: 1
   },
   header: {
     alignItems: 'flex-end',
@@ -142,34 +122,9 @@ const styles = StyleSheet.create({
     color: '#007bff',
     textDecorationLine: 'underline'
   },
-  loginButton: {
-    backgroundColor: 'white',
-    borderColor: '#ccc',
-    borderWidth: 1
-  },
-  loginButtonText: {
-    color: 'black',
-    fontWeight: 'bold'
-  },
-  logo: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginVertical: 20
-  },
   safeArea: {
     backgroundColor: 'white',
     flex: 1
-  },
-  signUpButton: {
-    backgroundColor: '#007bff'
-  },
-  signUpButtonText: {
-    color: 'white',
-    fontWeight: 'bold'
-  },
-  socialButtonText: {
-    color: 'white',
-    fontWeight: 'bold'
   },
   title: {
     fontSize: 18,

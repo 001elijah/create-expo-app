@@ -1,10 +1,10 @@
 import AntDesign from '@expo/vector-icons/AntDesign'
 import { useRouter } from 'expo-router'
 import { Formik } from 'formik'
-import { Platform, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as Yup from 'yup'
-import { FormField } from '@/components'
+import { FormField, PrimaryButton } from '@/components'
 import { LoginFormValues } from '@/types'
 
 const LoginSchema = Yup.object().shape({
@@ -54,15 +54,11 @@ export default function LoginScreen() {
                 secureTextEntry
               />
 
-              <TouchableOpacity onPress={handleForgotPassword} style={styles.forgotPasswordContainer}>
-                <Text style={styles.forgotPasswordText}>Forgot password?</Text>
-              </TouchableOpacity>
+              <PrimaryButton onPress={handleForgotPassword} title="Forgot password?" variant="link" />
 
               <View style={styles.bottomContainer}>
                 <View style={styles.dividerWithShadow} />
-                <TouchableOpacity onPress={() => formikProps.handleSubmit()} style={styles.nextButton}>
-                  <Text style={styles.nextButtonText}>NEXT</Text>
-                </TouchableOpacity>
+                <PrimaryButton onPress={() => formikProps.handleSubmit()} title="NEXT" variant="primary" />
               </View>
             </View>
           )}
@@ -110,15 +106,6 @@ const styles = StyleSheet.create({
       }
     }),
     width: 'auto'
-  },
-  forgotPasswordContainer: {
-    alignSelf: 'flex-start',
-    marginBottom: 20
-  },
-  forgotPasswordText: {
-    color: '#007bff',
-    fontSize: 16,
-    textDecorationLine: 'underline'
   },
   form: {
     flex: 1
