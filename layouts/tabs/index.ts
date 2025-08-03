@@ -1,4 +1,5 @@
 export * from './components/Carousel'
 export * from './components/HeaderLeft'
 export * from './components/HeaderRight'
+export * from './components/TrendingSearches'
 export * from './constants/tabs'

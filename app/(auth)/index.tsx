@@ -5,7 +5,7 @@ import { Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-n
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { PrimaryButton } from '@/components'
 import { images } from '@/constants/images'
-import { scaleHeight, scaleImage, scaleVertical, scaleWidth } from '@/helpers/scale'
+import { scaleHeight, scaleImage, scaleVertical } from '@/helpers/scale'
 
 export default function AuthScreen() {
   const router = useRouter()
