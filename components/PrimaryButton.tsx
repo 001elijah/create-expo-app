@@ -1,9 +1,20 @@
-import { ActivityIndicator, StyleSheet, Text, TextStyle, TouchableOpacity, ViewStyle } from 'react-native'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { ActivityIndicator, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native'
+import { scale } from '@/helpers/scale'
 import { useGlobalStyle } from '@/hooks/useGlobalStyle'
 import { useThemeStore } from '@/store/theme.store'
 
 export type ButtonSize = 'large' | 'medium' | 'small'
-export type ButtonVariant = 'apple' | 'facebook' | 'ghost' | 'google' | 'link' | 'outline' | 'primary' | 'secondary'
+export type ButtonVariant =
+  | 'apple'
+  | 'arrow'
+  | 'facebook'
+  | 'ghost'
+  | 'google'
+  | 'link'
+  | 'outline'
+  | 'primary'
+  | 'secondary'
 
 interface PrimaryButtonProps {
   disabled?: boolean
@@ -31,8 +42,6 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 
   const getButtonStyle = (): ViewStyle => {
     const baseStyle: ViewStyle = {
-      alignItems: 'center',
-      justifyContent: 'center',
       ...styles.base,
       ...styles[size]
     }
@@ -44,10 +53,21 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
           backgroundColor: 'black',
           borderRadius: 5
         }
+      case 'arrow':
+        return {
+          ...baseStyle,
+          borderColor: activeColors.foreground,
+          borderWidth: scale(1),
+          marginBottom: 0,
+          marginRight: scale(8),
+          paddingHorizontal: scale(8),
+          paddingVertical: scale(5),
+          width: 'auto'
+        }
       case 'facebook':
         return {
           ...baseStyle,
-          backgroundColor: '#3b5998'
+          backgroundColor: activeColors.facebook
         }
       case 'ghost':
         return {
@@ -100,6 +120,11 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
           ...basicStyles.FONT14,
           color: 'white',
           fontWeight: 'bold'
+        }
+      case 'arrow':
+        return {
+          ...basicStyles.FONT_VER_14,
+          fontWeight: 'normal'
         }
       case 'facebook':
         return {
@@ -166,6 +191,11 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     <TouchableOpacity activeOpacity={1} disabled={disabled || loading} onPress={onPress} style={buttonStyle}>
       {loading ? (
         <ActivityIndicator color={getActivityIndicatorColor()} size="small" />
+      ) : variant === 'arrow' ? (
+        <View style={styles.textContainer}>
+          <Text style={finalTextStyle}>{title}</Text>
+          <MaterialCommunityIcons color={activeColors.foreground} name="arrow-top-right" size={scale(20)} />
+        </View>
       ) : (
         <Text style={finalTextStyle}>{title}</Text>
       )}
@@ -175,7 +205,9 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 
 const styles = StyleSheet.create({
   base: {
-    marginBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: scale(10),
     width: '100%'
   },
   disabled: {
@@ -185,15 +217,16 @@ const styles = StyleSheet.create({
     opacity: 0.7
   },
   large: {
-    paddingHorizontal: 25,
-    paddingVertical: 18
+    paddingHorizontal: scale(25),
+    paddingVertical: scale(18)
   },
   medium: {
-    paddingHorizontal: 20,
-    paddingVertical: 15
+    paddingHorizontal: scale(20),
+    paddingVertical: scale(15)
   },
   small: {
-    paddingHorizontal: 15,
-    paddingVertical: 10
-  }
+    paddingHorizontal: scale(15),
+    paddingVertical: scale(10)
+  },
+  textContainer: { alignItems: 'center', flexDirection: 'row', justifyContent: 'center' }
 })
