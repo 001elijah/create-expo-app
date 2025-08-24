@@ -134,8 +134,8 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
         }
       case 'ghost':
         return {
-          ...baseTextStyle,
-          color: activeColors.textPrimary
+          ...basicStyles.FONT_VER_12,
+          color: activeColors.textContrast
         }
       case 'google':
         return {

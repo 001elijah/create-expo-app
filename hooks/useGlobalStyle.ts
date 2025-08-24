@@ -32,6 +32,13 @@ export const useGlobalStyle = () => {
     FONT_SECONDARY: {
       color: activeColors.textSecondary
     },
+    FONT_VER_12: {
+      fontFamily: 'Menlo',
+      fontSize: scaleHeight(12),
+      fontStyle: 'normal',
+      letterSpacing: scale(0.12),
+      lineHeight: scaleHeight(16)
+    },
     FONT_VER_14: {
       color: activeColors.textPrimary,
       fontFamily: 'Menlo',

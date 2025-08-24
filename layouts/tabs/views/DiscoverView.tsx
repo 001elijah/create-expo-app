@@ -1,5 +1,5 @@
-import { StyleSheet, View } from 'react-native'
-import { Carousel, TrendingSearches } from '@/layouts/tabs'
+import { ScrollView, StyleSheet } from 'react-native'
+import { Carousel, Trending, TrendingSearches } from '@/layouts/tabs'
 import { ICarouselItem } from '@/types'
 import { carouselData } from '../constants/carouselData'
 
@@ -10,10 +10,11 @@ export const DiscoverView = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Carousel data={carouselData} onItemPress={handleCarouselItemPress} />
       <TrendingSearches />
-    </View>
+      <Trending />
+    </ScrollView>
   )
 }
 
