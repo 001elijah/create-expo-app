@@ -1,3 +1,5 @@
 export * from './FormField'
+export * from './ImageGrid'
 export * from './PrimaryButton'
+export * from './SectionSubtitle'
 export * from './SectionTitle'

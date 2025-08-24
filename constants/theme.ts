@@ -12,7 +12,7 @@ export const colors: IColors = {
     ring: '#CCCCCC',
     textContrast: '#FFFFFF',
     textPrimary: '#FFFFFF',
-    textSecondary: '#758796',
+    textSecondary: '#727272',
     transparent: 'transparent'
   },
   light: {
@@ -26,7 +26,7 @@ export const colors: IColors = {
     ring: '#CCCCCC',
     textContrast: '#FFFFFF',
     textPrimary: '#000000',
-    textSecondary: '#758796',
+    textSecondary: '#727272',
     transparent: 'transparent'
   }
 }
